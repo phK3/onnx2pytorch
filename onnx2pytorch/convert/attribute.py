@@ -75,6 +75,8 @@ def extract_attributes(node):
                 raise NotImplementedError(
                     "auto_pad={} functionality not implemented.".format(value)
                 )
+        elif attr.name == "approximate" and node.op_type == "Gelu":
+            kwargs["approximate"] = extract_attr_values(attr)
         elif attr.name == "axis" and node.op_type == "Flatten":
             kwargs["start_dim"] = extract_attr_values(attr)
         elif attr.name == "axis" or attr.name == "axes":
