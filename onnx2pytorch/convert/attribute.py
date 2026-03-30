@@ -168,7 +168,8 @@ def extract_attributes(node):
         elif attr.name == "to":
             kwargs["dtype"] = TENSOR_PROTO_MAPPING[extract_attr_values(attr)].lower()
         elif attr.name == "training_mode":
-            kwargs["training_mode"] = extract_attr_values(attr)
+            training_mode = extract_attr_values(attr)
+            assert training_mode == 0, "Only inference mode is supported, bot got training_mode={}".format(training_mode)
         elif attr.name == "transB":
             kwargs["transpose_weight"] = not extract_attr_values(attr)
         elif attr.name == "transA":
