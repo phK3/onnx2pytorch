@@ -95,6 +95,11 @@ def convert_batch_norm_layer(node, params):
 
     # Initialize layer and load weights
     layer = layer(torch_params, **kwargs)
+
+    # assertion in attribute.py that training_mode == 0
+    # change that assertion, if this implementation changes!
+    layer.eval()
+    
     return layer
 
 
